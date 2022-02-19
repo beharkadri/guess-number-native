@@ -8,12 +8,14 @@ import {
   Alert,
 } from "react-native";
 import React, { useState } from "react";
-import Card from "../components/Card/Card";
-import colors from "../constants/colors";
-import Input from "../components/Input/Input";
-import NumberContainer from "../components/NumberContainer/NumberContainer";
-import TitleText from "../components/TitleText/TitleText";
-import BodyText from "../components/BodyText/BodyText";
+import Card from "../../components/Card/Card";
+import colors from "../../constants/colors";
+import Input from "../../components/Input/Input";
+import NumberContainer from "../../components/NumberContainer/NumberContainer";
+import TitleText from "../../components/TitleText/TitleText";
+import BodyText from "../../components/BodyText/BodyText";
+
+import styles from "./styles";
 
 const StartGameScreen = ({ startGame }) => {
   const [enteredValue, setEnteredValue] = useState("");
@@ -100,36 +102,3 @@ const StartGameScreen = ({ startGame }) => {
 };
 
 export default StartGameScreen;
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    padding: 10,
-    alignItems: "center",
-  },
-  title: {
-    marginVertical: 10,
-  },
-  inputContainer: {
-    width: 300,
-    maxWidth: "80%",
-    alignItems: "center",
-  },
-  input: {
-    width: 50,
-    textAlign: "center",
-  },
-  actions: {
-    flexDirection: "row",
-    width: "100%",
-    justifyContent: "space-between",
-    paddingHorizontal: 15,
-  },
-  button: {
-    width: 80,
-  },
-  summary: {
-    marginVertical: 20,
-    alignItems: "center",
-  },
-});

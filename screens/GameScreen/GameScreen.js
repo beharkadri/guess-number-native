@@ -1,4 +1,4 @@
-import { Alert, View, ScrollView } from "react-native";
+import { Alert, View, ScrollView, Dimensions } from "react-native";
 import React, { useState, useRef, useEffect } from "react";
 import NumberContainer from "../../components/NumberContainer/NumberContainer";
 import Card from "../../components/Card/Card";
@@ -22,10 +22,20 @@ const GameScreen = ({ chosenNumber, onGameOver }) => {
   const currentLow = useRef(1);
   const currentHigh = useRef(100);
   const [rounds, setRounds] = useState([initialGuess]);
+  const [layout, setLayout] = useState("portrait");
 
   useEffect(() => {
     currentGuess === chosenNumber ? onGameOver(rounds.length) : null;
-    return () => {};
+    const updateLayout = () => {
+      setLayout(
+        Dimensions.get("window").width > 500 ? "landscape" : "portrait"
+      );
+    };
+    Dimensions.addEventListener("change", updateLayout);
+
+    return () => {
+      Dimensions.removeEventListener("change", updateLayout);
+    };
   });
 
   const guessHandler = (direction) => {
@@ -54,13 +64,18 @@ const GameScreen = ({ chosenNumber, onGameOver }) => {
   return (
     <View style={styles.screen}>
       <TitleText>Opponent's Guess:</TitleText>
-      <NumberContainer>{currentGuess}</NumberContainer>
+      {layout === "portrait" && (
+        <NumberContainer>{currentGuess}</NumberContainer>
+      )}
       <Card style={styles.actions}>
         <View style={styles.button}>
           <MainButton onPress={guessHandler.bind(this, "lower")}>
             <Ionicons name="md-remove" size={24} color="white" />
           </MainButton>
         </View>
+        {layout === "landscape" && (
+          <NumberContainer>{currentGuess}</NumberContainer>
+        )}
         <View style={styles.button}>
           <MainButton onPress={guessHandler.bind(this, "greater")}>
             <Ionicons name="md-add" size={24} color="white" />

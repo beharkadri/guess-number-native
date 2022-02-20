@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import colors from "../../constants/colors";
 
 const styles = StyleSheet.create({
@@ -8,10 +8,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   imageWrap: {
-    width: 300,
-    height: 300,
     borderWidth: 1,
-    borderRadius: 150,
     overflow: "hidden",
     elevation: 20,
   },
